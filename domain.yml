@@ -1,0 +1,80 @@
+version: "3.1"
+
+intents:
+  - greet
+  - search_product
+  - specify_category
+  - send_budget
+  - product_detail
+  - add_to_cart
+  - view_cart
+  - checkout
+  - goodbye
+  - produits
+  - clients
+  - search_collection
+
+entities:
+  - product_name
+  - category
+  - budget
+  - collection
+
+slots:
+  product_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: product_name
+
+  category:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: category
+
+  budget:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: budget
+
+  collection:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: collection
+
+responses:
+
+  utter_greet:
+    - text: "Bonjour et bienvenue sur Jungle ! Que puis-je faire pour vous ?"
+
+  utter_search_product:
+    - text: "Très bien, quel type de produit recherchez-vous ? (ex : sac, robe, montre...)"
+
+  utter_ask_category:
+    - text: "Dans quelle catégorie recherchez-vous ? (mode, accessoires, décoration...)"
+
+  utter_ask_budget:
+    - text: "Quel est votre budget ?"
+
+  utter_no_product_found:
+    - text: "Aucun produit trouvé pour cette recherche."
+
+  utter_goodbye:
+    - text: "Merci d’avoir utilisé Jungle. À très bientôt !"
+
+  utter_ask_collection:
+    - text: "Pour quelle occasion recherchez-vous un produit ? (ex: été, sortie entre amis, anniversaire...)"
+
+actions:
+  - action_search_product_by_name
+  - action_search_product_by_category
+  - action_search_product_by_budget
+  - action_get_customer
+  - action_search_product_by_collection

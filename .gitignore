@@ -1,0 +1,11 @@
+rasa_env/
+__pycache__/
+*.pyc
+.env
+node_modules/
+.rasa/
+models/
+.DS_Store
+.idea/
+.vscode/
+*.log

@@ -1,0 +1,24 @@
+stories:
+
+- story: recherche par nom
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+        - product_name: sac
+    - action: action_search_product_by_name
+
+- story: recherche par catégorie
+  steps:
+    - intent: specify_category
+      entities:
+        - category: mode
+    - action: action_search_product_by_category
+
+- story: recherche par budget
+  steps:
+    - intent: send_budget
+      entities:
+        - budget: 20000
+    - action: action_search_product_by_budget
