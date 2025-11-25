@@ -16,13 +16,13 @@ def format_whatsapp_product(p):
     image_url = p.get("imageUrl", "")
     variants = p.get("variants", [])
 
-    caption = f"⭐ *{title}*\n💰 {price} FCFA\n"
+    caption = f" *{title}*\n {price} FCFA\n"
 
     if description:
-        caption += f"\n📄 *Description* : {description}\n"
+        caption += f"\n *Description* : {description}\n"
 
     if variants:
-        caption += "\n🎨 *Variantes* :\n"
+        caption += "\n *Variantes* :\n"
         for v in variants:
             size = v.get("size", "Taille inconnue")
             color = v.get("color", "Couleur inconnue")
@@ -126,7 +126,7 @@ class ActionSearchProductByCategory(Action):
             send_whatsapp_products(
                 dispatcher,
                 products,
-                f"🗂️ Produits dans la catégorie *{category}* :"
+                f" Produits dans la catégorie *{category}* :"
             )
 
         except Exception as e:
@@ -209,7 +209,7 @@ class ActionSearchProductByCollection(Action):
             send_whatsapp_products(
                 dispatcher,
                 products,
-                f"🎉 Suggestions pour *{collection}* :"
+                f" Suggestions pour *{collection}* :"
             )
 
         except Exception as e:

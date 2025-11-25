@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  rasa:
+    build: .
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./models:/app/models
+      - ./config.yml:/app/config.yml
+      - ./domain.yml:/app/domain.yml
+      - ./data:/app/data
+      - ./endpoints.yml:/app/endpoints.yml
+      - ./credentials.yml:/app/credentials.yml
+    depends_on:
+      - action_server
+    command: rasa run --enable-api --cors "*" --debug
+
+  action_server:
+    build: ./actions
+    ports:
+      - "5055:5055"
+    volumes:
+      - ./actions:/app/actions
