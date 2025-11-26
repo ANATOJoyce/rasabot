@@ -3,6 +3,7 @@ import inspect
 # from sanic import Sanic, Blueprint, response
 # from sanic.request import Request
 # from sanic.response import HTTPResponse
+import json
 import typing
 from typing import List, Text, Dict, Any, Optional, Callable, Awaitable, NoReturn, Union
 
@@ -21,33 +22,37 @@ from aiogram.types import User, Message
 from aiogram.utils.payload import prepare_arg, generate_payload
 from aiogram.bot.base import base
 
+BASE_URL = "https://api.telegram.org/bot"
+
 class MyOutput(TelegramOutput):
+    
     def __init__(self, access_token: Optional[Text]) -> None:
-        super().__init__(access_token)
         self.base_url = f"https://api.telegram.org/bot{access_token}"
+        super().__init__(access_token)
+        
     @classmethod
     def name(cls) -> Text:
         return "telegram"
     
-    def camel_case(value: str) -> str:
-        parts = value.lower().split('_')
-        return parts[0] + ''.join(word.capitalize() for word in parts[1:])
+    # def camel_case(value: str) -> str:
+    #     parts = value.lower().split('_')
+    #     return parts[0] + ''.join(word.capitalize() for word in parts[1:])
 
 
-    async def request(self, method: base.String,
-                      data: Optional[Dict] = None,
-                      files: Optional[Dict] = None, **kwargs) -> Union[List, Dict, base.Boolean]:
+    # async def request(self, method: base.String,
+    #                   data: Optional[Dict] = None,
+    #                   files: Optional[Dict] = None, **kwargs) -> Union[List, Dict, base.Boolean]:
 
-        url = f"{self.base_url}/{method}"
+    #     url = f"{self.base_url}/{method}"
 
-        headers = {
-            'Content-Type': 'application/json'
-        }
-        try:
-            response = requests.request("POST", url, headers=headers, data=data, files=files)
-            return response.json().get("result")
-        except Exception as e:
-            raise e
+    #     headers = {
+    #         'Content-Type': 'application/json'
+    #     }
+    #     try:
+    #         response = requests.request("POST", url, headers=headers, data=data, files=files)
+    #         return response.json().get("result")
+    #     except Exception as e:
+    #         raise e
         
     
     async def get_me(self) -> Dict[Text, Any]:
@@ -80,9 +85,10 @@ class MyOutput(TelegramOutput):
                                                       types.ReplyKeyboardRemove,
                                                       types.ForceReply, None] = None,
                            ) -> Message:
+        print(f"Sending message to chat_id {chat_id}: {text}")
         reply_markup = prepare_arg(reply_markup)
         entities = prepare_arg(entities)
-        payload = generate_payload(**locals())
+        payload = generate_payload(**{**locals(),"text": text, "chat_id": chat_id})
         if self.parse_mode and entities is None:
             payload.setdefault('parse_mode', self.parse_mode)
         url = f"{self.base_url}/sendMessage"
@@ -90,9 +96,10 @@ class MyOutput(TelegramOutput):
             'Content-Type': 'application/json'
         }
 
-        response = requests.request("POST", url, headers=headers, data=payload)
+        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
 
         response_body = response.json()
+        print("Send message response: %s", response_body)
         result = response_body.get("result")
         return Message(**result)
 
