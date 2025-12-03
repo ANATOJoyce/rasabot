@@ -2,23 +2,31 @@ version: "3.1"
 
 intents:
   - greet
+  - goodbye
   - search_product
-  - specify_category
-  - send_budget
-  - product_detail
   - add_to_cart
   - view_cart
   - checkout
-  - goodbye
+  - show_product_detail
+  - product_detail
+  - ask_product_details
+  - specify_category
+  - send_budget
+  - search_collection
   - produits
   - clients
-  - search_collection
+  - nlu_fallback
+  - out_of_scope
+  - restart
+  - back
+  - session_start
 
 entities:
   - product_name
+  - product_id
   - category
   - budget
-  - collection
+  - quantity
 
 slots:
   product_name:
@@ -28,6 +36,13 @@ slots:
       - type: from_entity
         entity: product_name
 
+  product_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: product_id
+
   category:
     type: text
     influence_conversation: true
@@ -36,45 +51,58 @@ slots:
         entity: category
 
   budget:
-    type: float
+    type: text
     influence_conversation: true
     mappings:
       - type: from_entity
         entity: budget
 
-  collection:
+  quantity:
     type: text
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: collection
+        entity: quantity
+
+  order_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
 
 responses:
-
   utter_greet:
-    - text: "Bonjour et bienvenue sur Jungle ! Que puis-je faire pour vous ?"
+    - text: "Bonjour ! 👋 Bienvenue sur Jungle Marketplace. Comment puis-je vous aider aujourd'hui ?"
+  
+  utter_goodbye:
+    - text: "Au revoir ! 👋 À bientôt sur Jungle !"
+  
+  utter_ask_product_name:
+    - text: "🔎 Quel produit recherchez-vous ?"
+  
+  utter_ask_category:
+    - text: "📂 Quelle catégorie vous intéresse ? (Ex: vêtements, électronique, maison...)"
+  
+  utter_ask_budget:
+    - text: "💰 Quel est votre budget maximum en FCFA ?"
 
   utter_search_product:
-    - text: "Très bien, quel type de produit recherchez-vous ? (ex : sac, robe, montre...)"
+    - text: "*{product_name}*\nPrix: {price} FCFA\n{description}"
+      image: "{image_url}"
+      buttons:
+        - title: "➕ Ajouter au panier"
+          payload: "/add_to_cart{{\"product_id\":\"{product_id}\"}}"
+        - title: "👀 Voir détails"
+          payload: "/show_product_detail{{\"product_id\":\"{product_id}\"}}"
+      button_type: vertical
 
-  utter_ask_category:
-    - text: "Dans quelle catégorie recherchez-vous ? (mode, accessoires, décoration...)"
-
-  utter_ask_budget:
-    - text: "Quel est votre budget ?"
-
-  utter_no_product_found:
-    - text: "Aucun produit trouvé pour cette recherche."
-
-  utter_goodbye:
-    - text: "Merci d’avoir utilisé Jungle. À très bientôt !"
-
-  utter_ask_collection:
-    - text: "Pour quelle occasion recherchez-vous un produit ? (ex: été, sortie entre amis, anniversaire...)"
 
 actions:
   - action_search_product_by_name
+ # - action_search_product_by_budget
   - action_search_product_by_category
-  - action_search_product_by_budget
-  - action_get_customer
-  - action_search_product_by_collection
+  - action_add_to_cart
+ # - action_show_cart
+  - action_checkout
+  - action_show_product_detail
+

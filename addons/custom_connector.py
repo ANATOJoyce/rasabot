@@ -4,7 +4,7 @@ import inspect
 # from sanic.request import Request
 # from sanic.response import HTTPResponse
 import json
-import typing
+import typing 
 from typing import List, Text, Dict, Any, Optional, Callable, Awaitable, NoReturn, Union
 
 # import rasa.utils.endpoints 

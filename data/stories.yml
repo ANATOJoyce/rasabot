@@ -1,24 +1,39 @@
-stories:
+version: "3.1"
 
-- story: recherche par nom
+stories:
+- story: recherche produit par nom
   steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: search_product
-      entities:
-        - product_name: sac
-    - action: action_search_product_by_name
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+  - action: action_search_product_by_name
+  
+- story: recherche par budget
+  steps:
+  - intent: send_budget
+  - action: action_search_product_by_budget
 
 - story: recherche par catégorie
   steps:
-    - intent: specify_category
-      entities:
-        - category: mode
-    - action: action_search_product_by_category
+  - intent: specify_category
+  - action: action_search_product_by_category
 
-- story: recherche par budget
+- story: ajouter au panier
   steps:
-    - intent: send_budget
-      entities:
-        - budget: 20000
-    - action: action_search_product_by_budget
+  - intent: add_to_cart
+  - action: action_add_to_cart
+
+- story: voir panier
+  steps:
+  - intent: view_cart
+  - action: action_show_cart
+
+- story: finaliser commande
+  steps:
+  - intent: checkout
+  - action: action_checkout
+
+- story: voir détails produit
+  steps:
+  - intent: show_product_detail
+  - action: action_show_product_detail

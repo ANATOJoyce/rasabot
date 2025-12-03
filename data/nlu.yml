@@ -1,47 +1,78 @@
+version: "3.1"
+
 nlu:
-- intent: search_product
-  examples: |
-    - Je cherche un [sac](product_name)
-    - Je veux une [jupe](product_name)
-    - Montre-moi des [robes](product_name)
-    - As-tu des [chaussures](product_name) ?
-    - Je veux acheter un [tshirt](product_name)
-    - Je veux voir des [montres](product_name)
-
-- intent: specify_category
-  examples: |
-    - Je cherche dans la catégorie [mode](category)
-    - Montre-moi les produits [accessoires](category)
-    - Je veux voir des [décorations](category)
-    - Je veux des articles de [beauté](category)
-    - Je veux des produits [électroniques](category)
-
-- intent: send_budget
-  examples: |
-    - Mon budget est de [50000](budget)
-    - Je ne veux pas dépasser [30000](budget)
-    - Entre [10000](budget) et [20000](budget)
-    - Je veux quelque chose à moins de [25000](budget)
-
-
-- intent: search_collection
-  examples: |
-    - Je veux une tenue pour l'[été](collection)
-    - Je cherche quelque chose pour une [sortie entre amis](collection)
-    - Je cherche une tenue pour une [fête d'anniversaire](collection)
-    - Je ne sais pas quoi mettre pour une [soirée](collection)
-    - Je veux une tenue pour le [travail](collection)
-    - Montre-moi des vêtements pour le [sport](collection)
-    - Je cherche une idée pour une [occasion spéciale](collection)
-    - Je veux un look pour un [mariage](collection)
-
 - intent: greet
   examples: |
-    - Bonjour
-    - Salut
-    - Coucou
+    - bonjour
+    - salut
+    - hello
+    - hey
+    - coucou
+    - bonsoir
 
 - intent: goodbye
   examples: |
-    - Merci
-    - Au revoir
+    - au revoir
+    - bye
+    - à plus
+    - à bientôt
+    - ciao
+
+- intent: search_product
+  examples: |
+    - je cherche [sacs](product_name)
+    - je veux [ordinateur](product_name)
+    - trouve moi [chaussures](product_name)
+    - cherche [téléphone](product_name)
+    - montre moi [vêtements](product_name)
+    - je cherche des [laptops](product_name)
+    - recherche [montre](product_name)
+
+- intent: send_budget
+  examples: |
+    - mon budget est [50000](budget)
+    - j'ai [100000](budget) fcfa
+    - maximum [200000](budget)
+    - moins de [30000](budget)
+    - [75000](budget) fcfa max
+
+- intent: specify_category
+  examples: |
+    - catégorie [électronique](category)
+    - dans [vêtements](category)
+    - section [maison](category)
+    - [accessoires](category)
+    - [mode](category)
+
+- intent: add_to_cart
+  examples: |
+    - ajoute au panier
+    - ajouter
+    - je veux ça
+    - prendre ce produit
+    - mettre dans le panier
+
+- intent: view_cart
+  examples: |
+    - voir mon panier
+    - panier
+    - mon panier
+    - qu'est-ce que j'ai dans le panier
+    - affiche mon panier
+
+- intent: checkout
+  examples: |
+    - finaliser
+    - passer commande
+    - commander
+    - valider
+    - acheter
+    - je commande
+
+- intent: show_product_detail
+  examples: |
+    - voir détails
+    - détails
+    - plus d'infos
+    - en savoir plus
+    - caractéristiques
