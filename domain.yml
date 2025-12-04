@@ -90,11 +90,11 @@ responses:
     - text: "*{product_name}*\nPrix: {price} FCFA\n{description}"
       image: "{image_url}"
       buttons:
-        - title: "➕ Ajouter au panier"
-          payload: "/add_to_cart{{\"product_id\":\"{product_id}\"}}"
-        - title: "👀 Voir détails"
-          payload: "/show_product_detail{{\"product_id\":\"{product_id}\"}}"
-      button_type: vertical
+        - payload: /affirm
+          title: "➕ Ajouter au panier"
+        - payload: "/show_product_detail{{\"product_id\":\"{product_id}\"}}"
+          title: "👀 Voir détails"
+          button_type: reply
 
 
 actions:
