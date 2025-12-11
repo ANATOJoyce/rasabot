@@ -1,0 +1,14 @@
+version: "3.1"
+
+rules:
+  - rule: "Règle de salutation"
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: "Règle de recherche de produit"
+    steps:
+      - intent: search_product
+      - action: utter_ask_product_name
+     
+    

@@ -1,39 +1,11 @@
-version: "3.1"
-
 stories:
-- story: recherche produit par nom
+- story: recherche de produits
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: search_product
-  - action: action_search_product_by_name
-  
-- story: recherche par budget
-  steps:
-  - intent: send_budget
-  - action: action_search_product_by_budget
-
-- story: recherche par catégorie
-  steps:
-  - intent: specify_category
-  - action: action_search_product_by_category
-
-- story: ajouter au panier
-  steps:
-  - intent: add_to_cart
-  - action: action_add_to_cart
-
-- story: voir panier
-  steps:
-  - intent: view_cart
-  - action: action_show_cart
-
-- story: finaliser commande
-  steps:
-  - intent: checkout
-  - action: action_checkout
-
-- story: voir détails produit
-  steps:
-  - intent: show_product_detail
-  - action: action_show_product_detail
+  - intent: inform
+    entities:
+    - product_name: 
+  - action: action_search_products
+  - intent: goodbye
+  - action: utter_goodbye

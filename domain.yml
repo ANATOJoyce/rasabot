@@ -2,107 +2,33 @@ version: "3.1"
 
 intents:
   - greet
-  - goodbye
   - search_product
-  - add_to_cart
-  - view_cart
-  - checkout
-  - show_product_detail
-  - product_detail
-  - ask_product_details
-  - specify_category
-  - send_budget
-  - search_collection
-  - produits
-  - clients
-  - nlu_fallback
-  - out_of_scope
-  - restart
-  - back
-  - session_start
+  - product_title
+  - inform
+  - goodbye
+  - categories
 
 entities:
   - product_name
-  - product_id
-  - category
-  - budget
-  - quantity
+
 
 slots:
   product_name:
     type: text
-    influence_conversation: true
     mappings:
       - type: from_entity
         entity: product_name
 
-  product_id:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: product_id
-
-  category:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: category
-
-  budget:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: budget
-
-  quantity:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: quantity
-
-  order_id:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: custom
-
 responses:
   utter_greet:
-    - text: "Bonjour ! 👋 Bienvenue sur Jungle Marketplace. Comment puis-je vous aider aujourd'hui ?"
-  
+    - text: "Bonjour, comment puis-je vous aider ?"
+
   utter_goodbye:
-    - text: "Au revoir ! 👋 À bientôt sur Jungle !"
+    - text: "Au revoir et à bientôt !"
   
   utter_ask_product_name:
-    - text: "🔎 Quel produit recherchez-vous ?"
-  
-  utter_ask_category:
-    - text: "📂 Quelle catégorie vous intéresse ? (Ex: vêtements, électronique, maison...)"
-  
-  utter_ask_budget:
-    - text: "💰 Quel est votre budget maximum en FCFA ?"
-
-  utter_search_product:
-    - text: "*{product_name}*\nPrix: {price} FCFA\n{description}"
-      image: "{image_url}"
-      buttons:
-        - payload: /affirm
-          title: "➕ Ajouter au panier"
-        - payload: "/show_product_detail{{\"product_id\":\"{product_id}\"}}"
-          title: "👀 Voir détails"
-          button_type: reply
-
+    - text: "Quel produit cherchez-vous ?"
 
 actions:
-  - action_search_product_by_name
- # - action_search_product_by_budget
-  - action_search_product_by_category
-  - action_add_to_cart
- # - action_show_cart
-  - action_checkout
-  - action_show_product_detail
-
+  - action_search_products
+  
